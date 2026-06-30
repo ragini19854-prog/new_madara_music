@@ -54,6 +54,16 @@ E_LANG     = 5213282086626121529   # 🌐 language (reuse globe)
 E_VOICE    = 5213342880949157786   # 🎙️ voice chat
 E_SONG     = 5346198457309560766   # 🎼 song
 E_PING     = 5253535698248325612   # ⚡ ping (reuse thunder)
+E_BOT      = 5213445267988176994   # 🤖 bot/ai (reuse search icon)
+E_FUN      = 5346167898401410819   # 🎮 fun (reuse heart)
+E_CRICKET  = 5199885118214255737   # 🏏 cricket (reuse fire)
+E_INSTA    = 5213282086626121529   # 📸 instagram (reuse globe)
+E_DOMAIN   = 5213282086626121529   # 🌍 domain (reuse globe)
+E_PROXY    = 5253535698248325612   # 🔧 proxy (reuse thunder)
+E_DORK     = 5213445267988176994   # 🔍 dork (reuse search)
+E_REVERSE  = 5213441462258031246   # 🔄 reverse (reuse back)
+E_PDF      = 5213268528664195706   # 📄 pdf (reuse clock)
+E_VCTOOLS  = 5213342880949157786   # 🎙️ vc tools (reuse mic)
 
 __all__ = [
     "ButtonStyle",
@@ -65,4 +75,6 @@ __all__ = [
     "E_BACK", "E_NEXT", "E_CLOSE", "E_CHECK", "E_WARN", "E_OWNER",
     "E_STATS", "E_PLAYLIST", "E_AUDIO", "E_VIDEO", "E_LIVE", "E_LANG",
     "E_VOICE", "E_SONG", "E_PING",
+    "E_BOT", "E_FUN", "E_CRICKET", "E_INSTA", "E_DOMAIN",
+    "E_PROXY", "E_DORK", "E_REVERSE", "E_PDF", "E_VCTOOLS",
 ]
