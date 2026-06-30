@@ -1,44 +1,42 @@
-# -----------------------------------------------
-# 🔸 MadaraMusic Project
-# 🔹 Developed & Maintained by: Shukla (https://github.com/itzshukla)
-# 📅 Copyright © 2022 – All Rights Reserved
-#
-# 📖 License:
-# This source code is open for educational and non-commercial use ONLY.
-# You are required to retain this credit in all copies or substantial portions of this file.
-# Commercial use, redistribution, or removal of this notice is strictly prohibited
-# without prior written permission from the author.
-#
-# ❤️ Made with dedication and love by ItzShukla
-# -----------------------------------------------
-from MADARAMUSIC import app
-from pyrogram.errors import RPCError
-from pyrogram.types import ChatMemberUpdated, InlineKeyboardMarkup, InlineKeyboardButton
-from typing import Union, Optional
-from PIL import Image, ImageDraw, ImageFont, ImageEnhance, ImageChops
+# ╔══════════════════════════════════════════════════╗
+# ║        🎵  M A D A R A  M U S I C  🎵           ║
+# ║  The Most Powerful Telegram Music Bot            ║
+# ║  Built with ❤️ for music lovers everywhere       ║
+# ╚══════════════════════════════════════════════════╝
+import os
 import random
 import asyncio
-import os
-import time
 from logging import getLogger
+
 from pyrogram import Client, filters, enums
-from pyrogram.enums import ParseMode, ChatMemberStatus
+from pyrogram.types import ChatMemberUpdated, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.enums import ParseMode, ChatMemberStatus, ButtonStyle
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance, ImageChops
+
+from MADARAMUSIC import app
 from MADARAMUSIC.utils.database import add_served_chat, get_assistant, is_active_chat
 from MADARAMUSIC.misc import SUDOERS
-from MADARAMUSIC.mongo.afkdb import PROCESS
-from MADARAMUSIC.utils.Shukla_ban import admin_filter
+from MADARAMUSIC.utils.emojis import E_HEART, E_SPARK, E_STAR, E_MUSIC, E_CROWN
 
 LOGGER = getLogger(__name__)
 
-random_photo = [
-    "https://telegra.ph/file/1949480f01355b4e87d26.jpg",
-    "https://telegra.ph/file/3ef2cc0ad2bc548bafb30.jpg",
-    "https://telegra.ph/file/a7d663cd2de689b811729.jpg",
-    "https://telegra.ph/file/6f19dc23847f5b005e922.jpg",
-    "https://telegra.ph/file/2973150dd62fd27a3a6ba.jpg",
+# ── Resolves asset paths portably ────────────────────
+_ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "assets")
+
+
+def _asset(name):
+    return os.path.join(_ASSETS, name)
+
+
+# ── 4 girl pics used as random welcome photos ─────────
+GIRL_PICS = [
+    _asset("girl1.png"),
+    _asset("girl2.png"),
+    _asset("girl3.png"),
+    _asset("girl4.png"),
 ]
 
-# --------------------------------------------------------------------------------- #
+
 class WelDatabase:
     def __init__(self):
         self.data = {}
@@ -47,25 +45,25 @@ class WelDatabase:
         return chat_id in self.data
 
     async def add_wlcm(self, chat_id):
-        if chat_id not in self.data:
-            self.data[chat_id] = {"state": "on"}  # Default state is "on"
+        self.data.setdefault(chat_id, {"state": "on"})
 
     async def rm_wlcm(self, chat_id):
-        if chat_id in self.data:
-            del self.data[chat_id]
+        self.data.pop(chat_id, None)
+
 
 wlcm = WelDatabase()
 
+
 class temp:
-    ME = None
+    ME      = None
     CURRENT = 2
-    CANCEL = False
-    MELCOW = {}
-    U_NAME = None
-    B_NAME = None
+    CANCEL  = False
+    MELCOW  = {}
+    U_NAME  = None
+    B_NAME  = None
 
 
-def circle(pfp, size=(500, 500), brightness_factor=10):
+def circle(pfp, size=(500, 500), brightness_factor=1.1):
     pfp = pfp.resize(size, Image.LANCZOS).convert("RGBA")
     pfp = ImageEnhance.Brightness(pfp).enhance(brightness_factor)
     bigsize = (pfp.size[0] * 3, pfp.size[1] * 3)
@@ -78,112 +76,188 @@ def circle(pfp, size=(500, 500), brightness_factor=10):
     return pfp
 
 
-def welcomepic(pic, user, chatname, id, uname, brightness_factor=1.3):
-    background = Image.open("MADARAMUSIC/assets/wel2.png")
+def _get_welcome_bg():
+    """Return welcome card background. Uses girl3 or falls back to wel2.png."""
+    candidates = [_asset("girl3.png"), _asset("girl4.png"), _asset("wel2.png")]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return None
+
+
+def welcomepic(pic, user, chatname, user_id, uname, brightness_factor=1.1):
+    os.makedirs("downloads", exist_ok=True)
+
+    bg_path = _get_welcome_bg()
+    if bg_path:
+        background = Image.open(bg_path).convert("RGBA").resize((1280, 720), Image.LANCZOS)
+    else:
+        background = Image.new("RGBA", (1280, 720), (10, 10, 30, 255))
+
+    # dark overlay so text is readable
+    overlay = Image.new("RGBA", background.size, (0, 0, 0, 120))
+    background = Image.alpha_composite(background, overlay)
+
     pfp = Image.open(pic).convert("RGBA")
-    pfp = circle(pfp, brightness_factor=brightness_factor)
-    pfp = pfp.resize((500, 500))
+    pfp = circle(pfp, size=(260, 260), brightness_factor=brightness_factor)
+
+    background.paste(pfp, (60, 230), pfp)
+
     draw = ImageDraw.Draw(background)
-    font = ImageFont.truetype('MADARAMUSIC/assets/font.ttf', size=60)
-    
-    # Updated ID position to (630, 450)
-    draw.text((630, 450), f'ID: {id}', fill=(255, 255, 255), font=font)
-    
-    # Updated PFP position to (48, 88)
-    pfp_position = (48, 88)
-    background.paste(pfp, pfp_position, pfp)
-    background.save(f"downloads/welcome#{id}.png")
-    return f"downloads/welcome#{id}.png"
+    try:
+        font_big = ImageFont.truetype(_asset("font.ttf"), size=52)
+        font_med = ImageFont.truetype(_asset("font.ttf"), size=36)
+        font_sm  = ImageFont.truetype(_asset("font.ttf"), size=28)
+    except:
+        font_big = font_med = font_sm = ImageFont.load_default()
+
+    # heading
+    draw.text((390, 200), "⎊ ᴡᴇʟᴄᴏᴍᴇ ⎊", fill=(255, 215, 0), font=font_big)
+    draw.text((390, 275), f"ɴᴀᴍᴇ : {user[:22]}", fill=(255, 255, 255), font=font_med)
+    draw.text((390, 330), f"ɪᴅ    : {user_id}", fill=(200, 200, 255), font=font_sm)
+    draw.text((390, 375), f"ᴜ     : @{uname if uname else 'None'}", fill=(200, 255, 200), font=font_sm)
+    draw.text((390, 425), f"ɢʀᴏᴜᴘ : {chatname[:24]}", fill=(255, 200, 200), font=font_sm)
+
+    out = f"downloads/welcome_{user_id}.png"
+    background.convert("RGB").save(out)
+    return out
 
 
 @app.on_message(filters.command("welcome") & ~filters.private)
 async def auto_state(_, message):
-    usage = "**ᴜsᴀɢᴇ:**\n**⦿ /welcome [on|off]**"
+    usage = (
+        "<blockquote><b>⚡ ᴡᴇʟᴄᴏᴍᴇ ᴄᴏᴍᴍᴀɴᴅ</b></blockquote>\n\n"
+        "✅ <code>/welcome on</code> — Enable welcome card\n"
+        "❌ <code>/welcome off</code> — Disable welcome card"
+    )
     if len(message.command) == 1:
         return await message.reply_text(usage)
 
     chat_id = message.chat.id
-    user = await app.get_chat_member(chat_id, message.from_user.id)
-    if user.status in (enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER):
-        A = await wlcm.find_one(chat_id)
-        state = message.text.split(None, 1)[1].strip().lower()
-        if state == "off":
-            if A:
-                await message.reply_text("**ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ !**")
-            else:
-                await wlcm.add_wlcm(chat_id)
-                await message.reply_text(f"**ᴅɪsᴀʙʟᴇᴅ ᴡᴇʟᴄᴏᴍᴇ ɪɴ** {message.chat.title}")
-        elif state == "on":
-            if not A:
-                await message.reply_text("**ᴇɴᴀʙʟᴇᴅ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ.**")
-            else:
-                await wlcm.rm_wlcm(chat_id)
-                await message.reply_text(f"**ᴇɴᴀʙʟᴇᴅ ᴡᴇʟᴄᴏᴍᴇ ɪɴ** {message.chat.title}")
+    member  = await app.get_chat_member(chat_id, message.from_user.id)
+    if member.status not in (enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER):
+        return await message.reply_text(
+            "❌ <b>ᴏɴʟʏ ᴀᴅᴍɪɴs ᴄᴀɴ ᴄʜᴀɴɢᴇ ᴡᴇʟᴄᴏᴍᴇ sᴇᴛᴛɪɴɢs!</b>",
+            reply_markup=InlineKeyboardMarkup([[
+                InlineKeyboardButton("✖️ ᴄʟᴏsᴇ", callback_data="close",
+                                     style=ButtonStyle.DANGER, icon_custom_emoji_id=E_SPARK)
+            ]]),
+        )
+
+    A     = await wlcm.find_one(chat_id)
+    state = message.text.split(None, 1)[1].strip().lower()
+
+    if state == "off":
+        if A:
+            await message.reply_text("⚠️ <b>ᴡᴇʟᴄᴏᴍᴇ ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ!</b>")
         else:
-            await message.reply_text(usage)
+            await wlcm.add_wlcm(chat_id)
+            await message.reply_text(
+                f"❌ <b>ᴡᴇʟᴄᴏᴍᴇ ᴅɪsᴀʙʟᴇᴅ ɪɴ</b> {message.chat.title}",
+                reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton("✅ ᴇɴᴀʙʟᴇ ᴀɢᴀɪɴ", callback_data="welcome_on",
+                                         style=ButtonStyle.SUCCESS, icon_custom_emoji_id=E_HEART)
+                ]]),
+            )
+    elif state == "on":
+        if not A:
+            await message.reply_text("⚠️ <b>ᴡᴇʟᴄᴏᴍᴇ ᴀʟʀᴇᴀᴅʏ ᴇɴᴀʙʟᴇᴅ!</b>")
+        else:
+            await wlcm.rm_wlcm(chat_id)
+            await message.reply_text(
+                f"✅ <b>ᴡᴇʟᴄᴏᴍᴇ ᴇɴᴀʙʟᴇᴅ ɪɴ</b> {message.chat.title}",
+                reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton("❌ ᴅɪsᴀʙʟᴇ", callback_data="welcome_off",
+                                         style=ButtonStyle.DANGER, icon_custom_emoji_id=E_SPARK)
+                ]]),
+            )
     else:
-        await message.reply("**sᴏʀʀʏ ᴏɴʟʏ ᴀᴅᴍɪɴs ᴄᴀɴ ᴇɴᴀʙʟᴇ ᴡᴇʟᴄᴏᴍᴇ!**")
+        await message.reply_text(usage)
 
 
 @app.on_chat_member_updated(filters.group, group=-3)
 async def greet_new_member(_, member: ChatMemberUpdated):
     chat_id = member.chat.id
-    count = await app.get_chat_members_count(chat_id)
+
     A = await wlcm.find_one(chat_id)
     if A:
         return
 
-    if member.new_chat_member and not member.old_chat_member and member.new_chat_member.status != "kicked":
-        user = member.new_chat_member.user
+    if not (member.new_chat_member and not member.old_chat_member):
+        return
+    if member.new_chat_member.status == "kicked":
+        return
+
+    user  = member.new_chat_member.user
+    count = await app.get_chat_members_count(chat_id)
+
+    try:
+        pic = await app.download_media(user.photo.big_file_id, file_name=f"pp{user.id}.png")
+    except:
+        pic = _asset("upic.png")
+
+    # Delete old welcome message
+    old = temp.MELCOW.get(f"welcome-{chat_id}")
+    if old:
         try:
-            pic = await app.download_media(user.photo.big_file_id, file_name=f"pp{user.id}.png")
-        except AttributeError:
-            pic = "MADARAMUSIC/assets/upic.png"
+            await old.delete()
+        except:
+            pass
 
-        if temp.MELCOW.get(f"welcome-{chat_id}") is not None:
+    try:
+        welcomeimg = welcomepic(
+            pic,
+            user.first_name or "User",
+            member.chat.title or "Group",
+            user.id,
+            user.username,
+        )
+
+        msg = await app.send_photo(
+            chat_id,
+            photo=welcomeimg,
+            caption=(
+                "<blockquote><b>⎊ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ ɢʀᴏᴜᴘ ⎊</b></blockquote>\n\n"
+                f"🎵 <b>ɴᴀᴍᴇ :</b> {user.mention}\n"
+                f"🆔 <b>ɪᴅ   :</b> <code>{user.id}</code>\n"
+                f"👤 <b>ᴜsᴇʀ :</b> @{user.username if user.username else 'None'}\n"
+                f"👥 <b>ᴍᴇᴍʙᴇʀs :</b> {count}\n\n"
+                f"<i>⭐ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ ғᴀᴍɪʟʏ!</i>"
+            ),
+            reply_markup=InlineKeyboardMarkup([
+                [
+                    InlineKeyboardButton(
+                        "👤 ᴠɪᴇᴡ ᴘʀᴏғɪʟᴇ",
+                        url=f"tg://openmessage?user_id={user.id}",
+                        style=ButtonStyle.PRIMARY,
+                        icon_custom_emoji_id=E_STAR,
+                    ),
+                ],
+                [
+                    InlineKeyboardButton(
+                        "➕ ᴀᴅᴅ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ",
+                        url=f"https://t.me/{app.username}?startgroup=true",
+                        style=ButtonStyle.SUCCESS,
+                        icon_custom_emoji_id=E_MUSIC,
+                    ),
+                ],
+            ]),
+        )
+        temp.MELCOW[f"welcome-{chat_id}"] = msg
+
+        # Try to clean up profile pic download
+        if pic != _asset("upic.png"):
             try:
-                await temp.MELCOW[f"welcome-{chat_id}"].delete()
-            except Exception as e:
-                LOGGER.error(e)
-
-        try:
-            welcomeimg = welcomepic(pic, user.first_name, member.chat.title, user.id, user.username)
-            button_text = "๏ ᴠɪᴇᴡ ɴᴇᴡ ᴍᴇᴍʙᴇʀ ๏"
-            add_button_text = "✙ ᴋɪᴅɴᴀᴘ ᴍᴇ ✙"
-            deep_link = f"tg://openmessage?user_id={user.id}"
-            add_link = f"https://t.me/{app.username}?startgroup=true"
-
-            msg = await app.send_photo(
-                chat_id,
-                photo=welcomeimg,
-                caption=f"""
-**⎊─────☵ ᴡᴇʟᴄᴏᴍᴇ ☵─────⎊**
-
-**▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬**
-
-**☉ ɴᴀᴍᴇ ⧽** {user.mention}
-**☉ ɪᴅ ⧽** `{user.id}`
-**☉ ᴜ_ɴᴀᴍᴇ ⧽** @{user.username if user.username else 'None'}
-**☉ ᴛᴏᴛᴀʟ ᴍᴇᴍʙᴇʀs ⧽** {count}
-
-**▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬**
-
-**⎉──────▢✭ 侖 ✭▢──────⎉**
-""",
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton(button_text, url=deep_link)],
-                    [InlineKeyboardButton(text=add_button_text, url=add_link)],
-                ])
-            )
-
-            temp.MELCOW[f"welcome-{chat_id}"] = msg
-
-            # Auto-delete welcome message in 5 minutes (300 seconds)
-            await asyncio.sleep(300)
-            try:
-                await msg.delete()
+                os.remove(pic)
             except:
                 pass
 
-        except Exception as e:
-            LOGGER.error(e)
+        # Auto-delete after 5 minutes
+        await asyncio.sleep(300)
+        try:
+            await msg.delete()
+        except:
+            pass
+
+    except Exception as e:
+        LOGGER.error(f"[welcome] error: {e}")
