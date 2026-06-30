@@ -1,7 +1,11 @@
 import re
+import os as _os
 from os import getenv
 from dotenv import load_dotenv
 from pyrogram import filters
+
+# Resolve assets directory (works on any deployment)
+_ASSETS = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "MADARAMUSIC", "assets")
 
 load_dotenv()
 
@@ -78,29 +82,28 @@ DEBUG_IGNORE_LOG = True
 
 ###### IMAGE URLS ######
 
-START_IMG_URL = getenv("START_IMG_URL", "https://files.catbox.moe/ak96mx.jpg")
-PING_IMG_URL = getenv("PING_IMG_URL", "https://files.catbox.moe/ak96mx.jpg")
-PLAYLIST_IMG_URL = "https://files.catbox.moe/lrwbj6.jpg"
-STATS_IMG_URL = "https://files.catbox.moe/ak96mx.jpg"
-TELEGRAM_AUDIO_URL = "https://files.catbox.moe/aesldg.jpg"
-TELEGRAM_VIDEO_URL = "https://files.catbox.moe/aesldg.jpg"
-STREAM_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
-SOUNCLOUD_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
-YOUTUBE_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
-SPOTIFY_ARTIST_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
-SPOTIFY_ALBUM_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
-SPOTIFY_PLAYLIST_IMG_URL = "https://files.catbox.moe/aesldg.jpg"
-
-
-MADARA_IMG = [
-    "https://files.catbox.moe/dw0as6.jpg",
-    "https://files.catbox.moe/t2m1pv.jpg",
-    "https://files.catbox.moe/lsbotb.jpg",
-    "https://files.catbox.moe/huuy1f.jpg",
-    "https://files.catbox.moe/7vfivr.jpg",
-    "https://files.catbox.moe/dqtuv2.jpg",
-    "https://files.catbox.moe/ac3tzn.jpg"
+# ── Girl pics (sent randomly by /start and /ping) ────────────────────────────
+_GIRL_PICS = [
+    _os.path.join(_ASSETS, "girl1.png"),
+    _os.path.join(_ASSETS, "girl2.png"),
+    _os.path.join(_ASSETS, "girl3.png"),
+    _os.path.join(_ASSETS, "girl4.png"),
 ]
+
+MADARA_IMG = _GIRL_PICS          # random.choice(MADARA_IMG) used by /start & /ping
+
+START_IMG_URL  = getenv("START_IMG_URL",  _os.path.join(_ASSETS, "girl1.png"))
+PING_IMG_URL   = getenv("PING_IMG_URL",   _os.path.join(_ASSETS, "girl2.png"))
+PLAYLIST_IMG_URL      = _os.path.join(_ASSETS, "girl3.png")
+STATS_IMG_URL         = _os.path.join(_ASSETS, "girl4.png")
+TELEGRAM_AUDIO_URL    = _os.path.join(_ASSETS, "girl1.png")
+TELEGRAM_VIDEO_URL    = _os.path.join(_ASSETS, "girl2.png")
+STREAM_IMG_URL        = _os.path.join(_ASSETS, "girl3.png")
+SOUNCLOUD_IMG_URL     = _os.path.join(_ASSETS, "girl4.png")
+YOUTUBE_IMG_URL       = _os.path.join(_ASSETS, "girl1.png")
+SPOTIFY_ARTIST_IMG_URL   = _os.path.join(_ASSETS, "girl2.png")
+SPOTIFY_ALBUM_IMG_URL    = _os.path.join(_ASSETS, "girl3.png")
+SPOTIFY_PLAYLIST_IMG_URL = _os.path.join(_ASSETS, "girl4.png")
 
 
 # Helper function
