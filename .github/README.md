@@ -1,167 +1,218 @@
-<h2 align="center">
-    ─「 𝐒ᴛʀᴀɴɢᴇʀ 𝘅 𝐌ᴜsɪᴄ 」─
+<div align="center">
 
-</h2>
+# ──「 🎵 MADARA X MUSIC 🎵 」──
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=ㅤ+𝚆𝙴𝙻𝙲𝙾𝙼𝙴+𝚃𝙾+𝚂𝚃𝚁𝙰𝙽𝙶𝙴𝚁+𝙼𝚄𝚂𝙸𝙲+𝚁𝙴𝙿𝙾+;ㅤ+𝚃𝙷𝙸𝚂+𝙸𝚂+𝙰+𝙰𝙳𝚅𝙰𝙽𝙲𝙴+𝙼𝚄𝚂𝙸𝙲+𝙱𝙾𝚃;𝙿𝙾𝚆𝙴𝚁𝙴𝙳+𝙱𝚈+☞+𝗧𝗛𝗘+𝗧𝗘𝗔𝗠+𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥)](https://github.com/itzshukla/MADARA-MUSIC)
-
-
-
-<p align="center">
-  <img src="https://telegra.ph/file/13afb9ee5c5da17930f1e.png">
-</p>
-
-
-
-![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=𝗙𝗢𝗥𝗞+𝗧𝗛𝗜𝗦+𝗥𝗘𝗣𝗢+𝗕𝗘𝗙𝗢𝗥𝗘+𝗗𝗘𝗣𝗟𝗢𝗬)
-
-
-## 🍁 About This Bot :
-
-</p>
-<p align='center'>
-    This repo will use to deploy for music playing bot of telegram
-</p>
-
-
-## ♢ How to make your own :
-
-
-#### ♢ Click on This Drop-down and get more details
-<br>
-<details>
-  <summary><b>Deploy on Heroku:</b></summary>
-
-
-1. Fork This Repo
-2. Click on the button to Deploy and follow steps
-
-<h4> So Follow Above Steps 👆 and then deploy other wise bot won't work</h4>
-
-Press the below button to Fast deploy on Heroku/Raiwlay
-Either you could locally host or deploy on [Heroku](https://heroku.com)
-### 💜 Heroku
-
-<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/itzshukla/MADARA-MUSIC"> <img src="https://www.herokucdn.com/deploy/button.svg"></a></p>
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=28&duration=3000&pause=1000&color=8A2BE2&center=true&vCenter=true&width=900&lines=Welcome+To+MADARA+X+MUSIC;The+Ultimate+Telegram+Music+Bot;Ultra+Fast+%7C+Premium+%7C+Powerful;Voice+Chat+Streaming+With+Style;Made+With+❤+By+MADARA)](https://github.com)
 
 <br>
 
+![Profile Views](https://komarev.com/ghpvc/?username=madara&label=Visitors&color=blueviolet&style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python)
+![Pyrogram](https://img.shields.io/badge/Pyrogram-Latest-blueviolet?style=for-the-badge)
+![License](https://img.shields.io/github/license/yourusername/MADARA-X-MUSIC?style=for-the-badge)
+![Stars](https://img.shields.io/github/stars/yourusername/MADARA-X-MUSIC?style=for-the-badge)
+![Forks](https://img.shields.io/github/forks/yourusername/MADARA-X-MUSIC?style=for-the-badge)
 
-then goto the <a href="#mandatory-vars">variables tab</a> for more info on setting up environmental variables. </details>
+</div>
 
-<details>
-  <summary><b>Features:</b></summary>
-  
-<p>
+---
 
-🚀Features<p>
-💥Superfast⚡️ download and stream links.<br>
-💥No ads in playing songs.<br>
-💥Superfast interface.<br>
-💥Updates channel Support.<br>
-💥Mongodb database support for broadcasting.<br>
-💥User Freindly Interface.<br>
-💥Ping check.<br>
-💥Kickme and Video Chat Notifier are Available.<br>
-💥Real time CPU , RAM , Internet usage. <br>
-💥All unwanted code removed. <br>
-💥A lot more tired of writing check out by deploying it. 
-</details>
-<details>
-  <summary><b>Host it on VPS Locally :</b></summary>
+# ✨ About
 
+**MADARA X MUSIC** is a premium Telegram Voice Chat Music Bot built for speed, stability, and an amazing user experience.
 
-```py
-sudo apt-get install python3-pip ffmpeg -y
-sudo apt-get install python3-pip -y
-sudo pip3 install -U pip
-curl -fssL
-https://deb.nodesource.com/setup_19.x | sudo -E bash - && sudo apt-get install nodejs -y && npm i -g npm
-git clone https://github.com/itzshukla/MADARA-MUSIC && cd MADARA-MUSIC
-pip3 install -U -r requirements.txt
-bash setup
-sudo apt install tmux
-tmux kill-session
-tmux
-bash start
-Ctrl+b then d
+It provides blazing-fast music streaming with modern controls, beautiful UI, and powerful management features.
+
+---
+
+# ⚡ Features
+
+- 🎵 High Quality Music Streaming
+- 🚀 Super Fast Song Search
+- 🎬 Video Playback
+- 📻 Live Radio Support
+- 🔁 Loop Mode
+- 🔀 Shuffle Queue
+- 🎚 Volume Control
+- 🎼 Playlist Support
+- 📜 Queue Management
+- 🎧 YouTube Streaming
+- 📂 Local File Playback
+- 🎤 Lyrics Support
+- 💾 MongoDB Database
+- 📊 Live CPU & RAM Usage
+- ⚙ Auto Restart
+- 🔒 Stable & Secure
+- 🌍 Multi Language Support
+- 👑 Premium User Interface
+- ⚡ Fast Response Time
+
+---
+
+# 🛠 Tech Stack
+
+| Technology | Description |
+|------------|-------------|
+| Python | Main Language |
+| Pyrogram | Telegram Framework |
+| PyTgCalls | Voice Chat Streaming |
+| FFmpeg | Audio Processing |
+| MongoDB | Database |
+| NodeJS | Additional Services |
+
+---
+
+# 📋 Commands
+
+## Music
+
+```
+/play
+/vplay
+/cplay
+/playforce
+/vplayforce
+/cplayforce
+/pause
+/resume
+/skip
+/stop
+/end
+/seek
+/seekback
+/shuffle
+/loop
+/queue
 ```
 
-and to stop the whole bot,
- do <kbd>CTRL</kbd>+<kbd>C</kbd>
+## Admin
 
-Setting up things
+```
+/auth
+/unauth
+/ping
+/stats
+/restart
+/update
+/logger
+```
 
-If you're on Heroku, just add these in the Environmental Variables
-or if you're Locally hosting, create a file named `sample.env` in the root directory and add all the variables there.
-An example of `sample.env` file:
+## General
 
-```py
+```
+/start
+/help
+/settings
+/alive
+/info
+```
+
+---
+
+# ⚙ Required Variables
+
+```env
 API_ID=
 API_HASH=
 BOT_TOKEN=
+STRING_SESSION=
+OWNER_ID=
 LOGGER_ID=
 MONGO_DB_URI=
-OWNER_ID=
-STRING_SESSION=
+UPDATES_CHANNEL=
+SUPPORT_CHAT=
 ```
-  </details>
 
-<details>
-  <summary><b>Vars and Details :</b></summary>
+---
 
-`API_ID` : Goto [my.telegram.org](https://my.telegram.org) to obtain this.
+# 🚀 Deploy
 
-`API_HASH` : Goto [my.telegram.org](https://my.telegram.org) to obtain this.
+## Heroku
 
-`BOT_TOKEN` : Get the bot token from [@BotFather](https://telegram.dog/BotFather)
-  
-`OWNER_ID` : Your Telegram User ID
+Click Deploy and fill your variables.
 
-`LOGGER_ID` : Your Telegram Chat ID For logs Where Bot and Assistant Id Should Be AdMin! 
+## Railway
 
-`STRING_SESSION` : Add String session for assistant to play songs on voice chat.
+Fork → Connect Repository → Deploy.
 
-`DATABASE_URL` : MongoDB URI for saving User IDs when they first Start the Bot. We will use that for Broadcasting to them. I will try to add more features related with Database. If you need help to get the URI you can click on logo below!
+## VPS
 
+```bash
+sudo apt update
+sudo apt install git ffmpeg python3 python3-pip nodejs npm tmux -y
 
- Option Vars
+git clone https://github.com/yourusername/MADARA-X-MUSIC
 
-`UPDATES_CHANNEL` : Put a Public Channel Username, so every user have to Join that channel to use the bot. Must add bot to channel as Admin to work properly.
- </details>
+cd MADARA-X-MUSIC
 
-<details>
-  <summary><b>How to Use :</b></summary>
+pip3 install -U -r requirements.txt
 
-:warning: **Before using the  bot, don't forget to add the bot to the `Logger_Chat` as an Admin**
- 
-- `/start` : To check if the bot is alive or not.
+bash setup
 
-- `/play ᴏʀ /vplay ᴏʀ /cplay` : sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ʀᴇǫᴜᴇsᴛᴇᴅ ᴛʀᴀᴄᴋ ᴏɴ ᴠɪᴅᴇᴏᴄʜᴀᴛ.
+bash start
+```
 
-- `/playforce ᴏʀ /vplayforce ᴏʀ /cplayforce` : **ғᴏʀᴄᴇ ᴩʟᴀʏ** sᴛᴏᴩs ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ᴀɴᴅ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ʀᴇǫᴜᴇsᴛᴇᴅ ᴛʀᴀᴄᴋ.
+---
 
-- `/channelplay [ᴄʜᴀᴛ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ɪᴅ] ᴏʀ [ᴅɪsᴀʙʟᴇ]` : ᴄᴏɴɴᴇᴄᴛ ᴄʜᴀɴɴᴇʟ ᴛᴏ ᴀ ɢʀᴏᴜᴩ ᴀɴᴅ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʀᴀᴄᴋs ʙʏ ᴛʜᴇ ʜᴇʟᴩ ᴏғ ᴄᴏᴍᴍᴀɴᴅs sᴇɴᴛ ɪɴ ɢʀᴏᴜᴩ.
+# 📂 Project Structure
 
-- `/seek` : sᴇᴇᴋ ᴛʜᴇ sᴛʀᴇᴀᴍ ᴛᴏ ᴛʜᴇ ɢɪᴠᴇɴ ᴅᴜʀᴀᴛɪᴏɴ.
+```
+MADARA-X-MUSIC
 
-- `/seekback` : ʙᴀᴄᴋᴡᴀʀᴅ sᴇᴇᴋ ᴛʜᴇ sᴛʀᴇᴀᴍ ᴛᴏ ᴛʜᴇ ᴛʜᴇ ɢɪᴠᴇɴ ᴅᴜʀᴀᴛɪᴏɴ.
+├── Music/
+├── config/
+├── plugins/
+├── database/
+├── cache/
+├── logs/
+├── requirements.txt
+├── setup
+└── start
+```
 
-- `/pause` : ᴩᴀᴜsᴇ ᴛʜᴇ ᴄᴜʀʀᴇɴᴛ ᴩʟᴀʏɪɴɢ sᴛʀᴇᴀᴍ.
+---
 
-- `/resume` : ʀᴇsᴜᴍᴇ ᴛʜᴇ ᴩᴀᴜsᴇᴅ sᴛʀᴇᴀᴍ.
+# 🔥 Why MADARA X MUSIC?
 
-- `/skip` : sᴋɪᴩ ᴛʜᴇ ᴄᴜʀʀᴇɴᴛ ᴩʟᴀʏɪɴɢ sᴛʀᴇᴀᴍ ᴀɴᴅ sᴛᴀʀᴛ sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ɴᴇxᴛ ᴛʀᴀᴄᴋ ɪɴ ǫᴜᴇᴜᴇ.
+✔ Ultra Fast
 
-- `/end ᴏʀ /stop` : ᴄʟᴇᴀʀs ᴛʜᴇ ǫᴜᴇᴜᴇ ᴀɴᴅ ᴇɴᴅ ᴛʜᴇ ᴄᴜʀʀᴇɴᴛ ᴩʟᴀʏɪɴɢ sᴛʀᴇᴀᴍ.
+✔ Lightweight
 
-To get an instant result do /reboot in chat of logger .
-  
-![image](https://graph.org/file/801e199f756d83cb4d7f5-068bb84543385c04b6.jpg)
+✔ Premium Design
 
+✔ Stable Streaming
 
-### Channel Support
-Bot also Supported with Channels. Just add bot and assistant to the Channel as Admin. </details>
+✔ Clean Source
+
+✔ Easy Deployment
+
+✔ Beginner Friendly
+
+✔ Regular Updates
+
+✔ Modern Codebase
+
+---
+
+# ❤️ Support
+
+If you like this project,
+
+⭐ Star the Repository
+
+🍴 Fork the Repository
+
+💙 Share with your friends
+
+---
+
+<div align="center">
+
+## ⭐ Don't Forget To Star This Repository ⭐
+
+### Made With ❤️ By MADARA
+
+</div>
 
 ### Credits : 
 
